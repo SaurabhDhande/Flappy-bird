@@ -5,7 +5,7 @@ variables:
   imageRepository: saurabhdhande/bird
   dockerfilePath: $(Build.SourcesDirectory)/Dockerfile
   buildContext: $(Build.SourcesDirectory)
-  dockerRegistryServiceConnection: Dockethub
+  dockerRegistryServiceConnection: Dockerhub
   tag: $(Build.BuildId)
 
 pool:
