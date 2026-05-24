@@ -2,15 +2,14 @@ trigger:
 - main
 
 variables:
-  repository: saurabhdhande/bird
-  dockerfilePath: Dockerfile
-  containerRegistry: Dockethub
+  imageRepository: saurabhdhande/bird
+  dockerfilePath: $(Build.SourcesDirectory)/Dockerfile
+  buildContext: $(Build.SourcesDirectory)
+  dockerRegistryServiceConnection: Dockethub
   tag: $(Build.BuildId)
 
 pool:
-  name: Ubuntu
-  demands:
-  - agent.name -equals ubuntu-self
+  vmImage: ubuntu-latest
 
 stages:
 - stage: DockerBuildPush
@@ -23,9 +22,10 @@ stages:
       displayName: Docker build and push
       inputs:
         command: buildAndPush
-        repository: $(repository)
+        repository: $(imageRepository)
         dockerfile: $(dockerfilePath)
-        containerRegistry: $(containerRegistry)
+        buildContext: $(buildContext)
+        containerRegistry: $(dockerRegistryServiceConnection)
         tags: |
           $(tag)
           latest
