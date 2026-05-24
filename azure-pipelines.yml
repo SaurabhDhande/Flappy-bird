@@ -1,0 +1,31 @@
+trigger:
+- main
+
+variables:
+  repository: saurabhdhande/bird
+  dockerfilePath: Dockerfile
+  containerRegistry: Dockethub
+  tag: $(Build.BuildId)
+
+pool:
+  name: Ubuntu
+  demands:
+  - agent.name -equals ubuntu-self
+
+stages:
+- stage: DockerBuildPush
+  displayName: Docker build and push
+  jobs:
+  - job: build
+    displayName: Docker build
+    steps:
+    - task: Docker@2
+      displayName: Docker build and push
+      inputs:
+        command: buildAndPush
+        repository: $(repository)
+        dockerfile: $(dockerfilePath)
+        containerRegistry: $(containerRegistry)
+        tags: |
+          $(tag)
+          latest
