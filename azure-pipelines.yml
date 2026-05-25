@@ -10,7 +10,7 @@ variables:
   dockerRegistryServiceConnection: Dockerhub
   tag: $(Build.BuildId)
 pool:
-  name: Default
+  name: Ubuntu
   demands:
     - agent.name -equals ubuntu-self
 
