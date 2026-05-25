@@ -10,10 +10,9 @@ variables:
   dockerRegistryServiceConnection: Dockerhub
   tag: $(Build.BuildId)
 pool:
-  name: Ubuntu
+  name: Default
   demands:
     - agent.name -equals ubuntu-self
-  
 
 stages:
 - stage: DockerBuildPush
