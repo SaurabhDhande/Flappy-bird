@@ -29,5 +29,4 @@ stages:
         dockerfile: $(dockerfilePath)
         buildContext: $(buildContext)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: |
-          $(imageTag)
+        tags: $(tag)
