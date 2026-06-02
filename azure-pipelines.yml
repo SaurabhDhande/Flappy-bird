@@ -7,7 +7,8 @@ variables:
   dockerfilePath: $(Build.SourcesDirectory)/Dockerfile
   buildContext: $(Build.SourcesDirectory)
   dockerRegistryServiceConnection: Dockerhub
-  tag: $(Build.BuildId)
+  majorVersion: 1
+  minorVersion: 0
 
 pool:
   vmImage: Ubuntu-latest
@@ -21,6 +22,7 @@ stages:
     steps:
 
 
+
     - task: Docker@2
       displayName: Docker build and push
       inputs:
@@ -29,4 +31,4 @@ stages:
         dockerfile: $(dockerfilePath)
         buildContext: $(buildContext)
         containerRegistry: $(dockerRegistryServiceConnection)
-        tags: $(tag)
+        tags: $(majorVersion).$(minorVersion).$(Build.BuildId)
